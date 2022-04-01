@@ -18,3 +18,10 @@ nav {
 .searchCity {
   width: 100%;
 }
+
+/* box for current weather */
+.currentWeather {
+  min-height: 350px;
+  margin-top: 10px;
+  padding: 10px;
+}
