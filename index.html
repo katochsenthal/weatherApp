@@ -23,34 +23,46 @@
     <title>Weather App</title>
   </head>
   <body>
-      <!-- navbar -->
-   <nav class="navbar sticky-top navbar-light bg-light">
+    <!-- navbar -->
+    <nav class="navbar sticky-top navbar-light bg-light">
       <h1 class="title mb-0 h1 ml-auto">Weather Dashboard</h1>
-   </nav>
-   <!-- page content -->
+    </nav>
+    <!-- page content -->
     <div class="container">
       <div class="row">
-
         <!-- right side search bar content -->
         <div class="col-sm-4 cityDisplay">
-        <h4>Search for a city:</h4>
-        
-        <div class="searchBar">
-        <input type="text" class="searchCity" placeholder="Enter a City to get Weather"/>
-        </div>
-        <div class="searchBtn">
-        <button type="button" class="btn btn-primary btn-md btn-block">Search</button>
-        </div>
-        <hr class="divider">
+          <h4>Search for a city:</h4>
+
+          <div class="searchBar">
+            <input
+              type="text"
+              class="searchCity"
+              placeholder="Enter a City to get Weather"
+            />
+          </div>
+          <div class="searchBtn">
+            <button type="button" class="btn btn-primary btn-md btn-block">
+              Search
+            </button>
+          </div>
+          <hr class="divider" />
         </div>
 
         <!-- weather displayed  -->
-      <div class="displayWeather col-sm-8">
+        <div class="displayWeather col-sm-8">
           <div class="currentWeather card border border-dark"></div>
-          <div class="futureForecast">
-      </div>
-    
 
+          <div class="futureForecast">
+            <h5 class="forecastHeading">5-Day Forecast:</h5>
+            <div class="card-group">
+             <div class="day-1 card text-white bg-secondary"></div>
+             <div class="day-2 card bg-secondary "></div>
+             <div class="day-3 card bg-secondary "></div>
+             <div class="day-4 card bg-secondary"></div>
+             <div class="day-5 card bg-secondary"></div>
+           </div>
+        </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>

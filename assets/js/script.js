@@ -2,14 +2,23 @@ var searchCityEl = document.querySelector(".searchCity");
 var searchBtnEl = document.querySelector(".searchBtn");
 var currentWeatherEl = document.querySelector(".currentWeather");
 
+var day1El = document.querySelector(".day-1");
+var day2El = document.querySelector(".day-2");
+var day3El = document.querySelector(".day-3");
+var day4El = document.querySelector(".day-4");
+var day5El = document.querySelector(".day-5");
+
+var cardArray = [day1El, day2El, day4El, day5El];
+
 var apiKey = "607439a3ad59adef49501bad43c27015";
 
 var city = function () {
   var cityName = searchCityEl.value;
-  getWeather(cityName);
+  currentWeatherEl.innerHTML = "";
+  getCurrentWeather(cityName);
 };
 
-var getWeather = function (city) {
+var getCurrentWeather = function (city) {
   fetch(
     "https://api.openweathermap.org/data/2.5/weather?q=" +
       city +
@@ -29,6 +38,7 @@ var getWeather = function (city) {
       var cityLat = data.coord.lat;
 
       var cityHeading = document.createElement("h2");
+      cityHeading.className = "city_heading";
       cityHeading.innerHTML = city + ", " + currentDate;
       currentWeatherEl.append(cityHeading);
 
@@ -45,14 +55,15 @@ var getWeather = function (city) {
       currentWeatherEl.append(currentWeatherHumidity);
 
       getUv(cityLon, cityLat);
+      searchCityEl.value = "";
     });
 };
 
 var getUv = function (lon, lat) {
   fetch(
-    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    "https://api.openweathermap.org/data/2.5/onecall?lon=" +
       lon +
-      "&lon=" +
+      "&lat=" +
       lat +
       "&exclude=hourly,daily&appid=" +
       apiKey
@@ -65,10 +76,59 @@ var getUv = function (lon, lat) {
       var uvEl = document.createElement("p");
       uvEl.innerHTML = "UV Index: " + weatherUv;
       currentWeatherEl.append(uvEl);
+
+      if (weatherUv >= 0 && weatherUv <= 2) {
+        uvEl.style.backgroundColor = "green";
+      } else if (weatherUv >= 3 && weatherUv <= 5) {
+        uvEl.style.backgroundColor = "yellow";
+      } else {
+        uvEl.style.backgroundColor = "red";
+      }
     });
 };
 
-var fiveDayWeather = function () {};
+var fiveDayWeather = function (lon, lat) {
+  fetch(
+    "https://api.openweathermap.org/data/2.5/forecast?lon=" +
+      lon +
+      "&lat=" +
+      lat +
+      "&appid=" +
+      apiKey +
+      "&units=metric"
+  )
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      var weatherArray = data.list;
+
+      var fiveDays = weatherArray.filter((day) =>
+        day.dt_txt.includes("18:00:00")
+      );
+
+      for (var i = 0; i < fiveDays.length; i++) {
+        var day = fiveDays[i];
+        var icon = day.weather[0].icon;
+        var dt = new Date(day.dt * 1000);
+        var dayTemp = day.main.temp;
+        var dayHumidity = day.main.humidity;
+        var dayWind = day.wind.speed;
+
+        cardArray[i].append(dayTemp);
+        cardArray[i].append(dayHumidity);
+        cardArray[i].append(dayWind);
+
+        console.log(dt);
+        console.log(dayTemp);
+        console.log(dayHumidity);
+        console.log(dayWind);
+      }
+    });
+};
+
+var displayWeather = function () {};
 
 searchBtnEl.addEventListener("click", function () {
   city();
