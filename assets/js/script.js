@@ -2,14 +2,6 @@ var searchCityEl = document.querySelector(".searchCity");
 var searchBtnEl = document.querySelector(".searchBtn");
 var currentWeatherEl = document.querySelector(".currentWeather");
 
-var day1El = document.querySelector(".day-1");
-var day2El = document.querySelector(".day-2");
-var day3El = document.querySelector(".day-3");
-var day4El = document.querySelector(".day-4");
-var day5El = document.querySelector(".day-5");
-
-var cardArray = [day1El, day2El, day4El, day5El];
-
 var apiKey = "607439a3ad59adef49501bad43c27015";
 
 var city = function () {
@@ -116,10 +108,6 @@ var fiveDayWeather = function (lon, lat) {
         var dayHumidity = day.main.humidity;
         var dayWind = day.wind.speed;
 
-        cardArray[i].append(dayTemp);
-        cardArray[i].append(dayHumidity);
-        cardArray[i].append(dayWind);
-
         console.log(dt);
         console.log(dayTemp);
         console.log(dayHumidity);
@@ -127,8 +115,6 @@ var fiveDayWeather = function (lon, lat) {
       }
     });
 };
-
-var displayWeather = function () {};
 
 searchBtnEl.addEventListener("click", function () {
   city();

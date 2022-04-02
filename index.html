@@ -29,42 +29,83 @@
     </nav>
     <!-- page content -->
     <div class="container">
-      <div class="row">
-        <!-- right side search bar content -->
-        <div class="col-sm-4 cityDisplay">
-          <h4>Search for a city:</h4>
+      <!-- right side search bar content -->
+      <div class="col-sm-4 cityDisplay">
+        <h4>Search for a city:</h4>
 
-          <div class="searchBar">
-            <input
-              type="text"
-              class="searchCity"
-              placeholder="Enter a City to get Weather"
-            />
-          </div>
-          <div class="searchBtn">
-            <button type="button" class="btn btn-primary btn-md btn-block">
-              Search
-            </button>
-          </div>
-          <hr class="divider" />
+        <div class="searchBar">
+          <input
+            type="text"
+            class="searchCity"
+            placeholder="Enter a City to get Weather"
+          />
         </div>
+        <div class="searchBtn">
+          <button type="button" class="btn btn-primary btn-md btn-block">
+            Search
+          </button>
+        </div>
+        <hr class="divider" />
+      </div>
 
-        <!-- weather displayed  -->
-        <div class="displayWeather col-sm-8">
-          <div class="currentWeather card border border-dark"></div>
+      <!-- weather displayed  -->
+      <div class="displayWeather col-sm-12">
+        <div class="currentWeather card border border-dark"></div>
+        <h2>5 Day Forecast:</h2>
+        <div class="futureForecast row">
+          <div class="card1 col-sm-3">
+            <h5 class="card-title">Special title treatment</h5>
+            <img class="wImg1" />
+            <div class="card-body">
+              <p class="day-1-temp"></p>
+              <p class="day-1-wind"></p>
+              <p class="day-1-humidity"></p>
+            </div>
+          </div>
 
-          <div class="futureForecast">
-            <h5 class="forecastHeading">5-Day Forecast:</h5>
-            <div class="card-group">
-             <div class="day-1 card text-white bg-secondary"></div>
-             <div class="day-2 card bg-secondary "></div>
-             <div class="day-3 card bg-secondary "></div>
-             <div class="day-4 card bg-secondary"></div>
-             <div class="day-5 card bg-secondary"></div>
-           </div>
+          <div class="card2 col-sm-2">
+            <h5 class="card-title">Special title treatment</h5>
+            <img class="wImg2" />
+            <div class="card-body">
+              <p class="day-2-temp"></p>
+              <p class="day-2-wind"></p>
+              <p class="day-3-humidity"></p>
+            </div>
+          </div>
+
+          <div class="card3 col-sm-2">
+            <h5 class="card-title">Special title treatment</h5>
+            <img class="wImg3" />
+            <div class="card-body">
+              <p class="day-3-temp"></p>
+              <p class="day-3-wind"></p>
+              <p class="day-3-humidity"></p>
+            </div>
+          </div>
+
+          <div class="card4 col-sm-2">
+            <h5 class="card-title">Special title treatment</h5>
+            <img class="wImg4" />
+            <div class="card-body">
+              <p class="day-4-temp"></p>
+              <p class="day-4-wind"></p>
+              <p class="day-4-humidity"></p>
+            </div>
+          </div>
+
+          <div class="card5 col-sm-3">
+            <h5 class="card-title">Special title treatment</h5>
+            <img class="wImg5" />
+            <div class="card-body">
+              <p class="day-5-temp"></p>
+              <p class="day-5-wind"></p>
+              <p class="day-5-humidity"></p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="assets/js/script.js"></script>
