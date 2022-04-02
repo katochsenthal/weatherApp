@@ -26,16 +26,19 @@ nav {
   padding: 10px;
 }
 
+.card-group {
+  min-height: 200px;
+  display: flex;
+}
+
 .forecastHeading {
   margin-top: 10px;
 }
 
-.card1,
-.card2,
-.card3,
-.card4,
-.card5 {
+.day-1,
+.day-2,
+.day-3,
+.day-4 {
   padding: 5px;
-  color: light;
-  background: linear-gradient(90deg, #00c9ff 0%, #92fe9d 100%);
+  margin: 5px;
 }

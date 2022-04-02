@@ -2,6 +2,14 @@ var searchCityEl = document.querySelector(".searchCity");
 var searchBtnEl = document.querySelector(".searchBtn");
 var currentWeatherEl = document.querySelector(".currentWeather");
 
+var day1El = document.querySelector(".day-1");
+var day2El = document.querySelector(".day-2");
+var day3El = document.querySelector(".day-3");
+var day4El = document.querySelector(".day-4");
+var day5El = document.querySelector(".day-5");
+
+var cardArray = [day1El, day2El, day3El, day4El, day5El];
+
 var apiKey = "607439a3ad59adef49501bad43c27015";
 
 var city = function () {
@@ -22,6 +30,7 @@ var getCurrentWeather = function (city) {
       return response.json();
     })
     .then(function (data) {
+      console.log(data);
       var currentDate = moment().format("MMMM Do YYYY");
       var weatherNow = data.main.temp;
       var windSpeedNow = data.wind.speed;
@@ -48,6 +57,7 @@ var getCurrentWeather = function (city) {
 
       getUv(cityLon, cityLat);
       searchCityEl.value = "";
+      fiveDayWeather(cityLon, cityLat);
     });
 };
 
@@ -104,17 +114,18 @@ var fiveDayWeather = function (lon, lat) {
         var day = fiveDays[i];
         var icon = day.weather[0].icon;
         var dt = new Date(day.dt * 1000);
-        var dayTemp = day.main.temp;
+        var dayTemp = day.main.temp.toFixed(2);
         var dayHumidity = day.main.humidity;
         var dayWind = day.wind.speed;
 
-        console.log(dt);
-        console.log(dayTemp);
-        console.log(dayHumidity);
-        console.log(dayWind);
+        cardArray[i].append(dayTemp);
+        cardArray[i].append(dayHumidity);
+        cardArray[i].append(dayWind);
       }
     });
 };
+
+var displayWeather = function () {};
 
 searchBtnEl.addEventListener("click", function () {
   city();
