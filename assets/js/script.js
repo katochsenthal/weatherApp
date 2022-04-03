@@ -14,32 +14,34 @@ var historyEl = document.querySelector(".history");
 
 // saving recent search to local storage
 
-var savedCities = JSON.parse(localStorage.getItem("recentCities"));
+var savedCities = JSON.parse(localStorage.getItem("recentCities")) || [];
 
-if (!savedCities) {
-  savedCities = [];
+function saveRecentCities(city) {
+  savedCities.push(city);
+  localStorage.setItem("recentCities", JSON.stringify(savedCities));
+  generateSearchHistory();
 }
-localStorage.setItem("cities", JSON.stringify(city));
-savedCities.push(city);
-localStorage.setItem("recentCities", JSON.stringify(savedCities));
 
-historyEl.innerHTML = "";
-for (var i = 0; i < savedCities.length; i++) {
-  var recentItem = document.createElement("li");
-  recentItem.setAttribute("class", "col-10-m-2 btn btn-primary");
-  recentItem.textContent = ("cities", savedCities[i]);
-  historyEl.appendChild(recentItem);
-  recentItem.addEventListener("click", function (e) {
-    var city = e.target.textContent;
-    searchCityEl.value = city;
-    getCurrentWeather(city);
-  });
+function generateSearchHistory() {
+  historyEl.innerHTML = "";
+  for (var i = 0; i < savedCities.length; i++) {
+    var recentItem = document.createElement("li");
+    recentItem.setAttribute("class", "col-10-m-2 btn btn-primary");
+    recentItem.textContent = ("cities", savedCities[i]);
+    historyEl.appendChild(recentItem);
+    recentItem.addEventListener("click", function (e) {
+      var city = e.target.textContent;
+      searchCityEl.value = city;
+      getCurrentWeather(city);
+    });
+  }
 }
 
 var city = function () {
   var cityName = searchCityEl.value;
   currentWeatherEl.innerHTML = "";
   getCurrentWeather(cityName);
+  saveRecentCities(cityName);
 };
 
 var getCurrentWeather = function (city) {
@@ -105,7 +107,7 @@ var getUv = function (lon, lat) {
 
       if (weatherUv >= 0 && weatherUv <= 2) {
         uvEl.style.backgroundColor = "green";
-      } else if (weatherUv >= 3 && weatherUv <= 5) {
+      } else if (weatherUv <= 3 && weatherUv <= 5) {
         uvEl.style.backgroundColor = "yellow";
       } else {
         uvEl.style.backgroundColor = "red";
@@ -146,7 +148,7 @@ var fiveDayWeather = function (lon, lat) {
         cardArray[i].append(icon + " ");
         cardArray[i].append("Temp:" + dayTemp + "℃ ");
         cardArray[i].append("Humidity: " + dayHumidity + "% ");
-        cardArray[i].append("Windspeed:" + dayWind + "m/s");
+        cardArray[i].append("WindSpeed:" + dayWind + "m/s");
       }
     });
 };
@@ -154,3 +156,4 @@ var fiveDayWeather = function (lon, lat) {
 searchBtnEl.addEventListener("click", function () {
   city();
 });
+generateSearchHistory();
