@@ -35,11 +35,11 @@
         <div class="col-sm-4 cityDisplay">
           <h4>Search for a city:</h4>
 
-          <div class="searchBar">
+          <div class="input-group">
             <input
               type="text"
               class="searchCity"
-              placeholder="Enter a City to get Weather"
+              placeholder="Enter City Name"
             />
           </div>
           <div class="searchBtn">
@@ -48,22 +48,22 @@
             </button>
           </div>
           <hr class="divider" />
-
-          <ul class="history"></ul>
+         <button class="btn btn-primary clear-history" type="button" >Clear History</button>
+          <for class="history"></for>
         </div>
 
         <!-- weather displayed  -->
-        <div class="displayWeather col-sm-12">
+        <div class="displayWeather col-sm-8">
           <div class="currentWeather card border border-dark"></div>
 
           <div class="futureForecast">
             <h5 class="forecastHeading">5-Day Forecast:</h5>
             <div class="card-group">
-             <div class="day-1 card text-white m-4 p-3 bg-secondary"></div>
-             <div class="day-2 card text-white  m-4 p-3 bg-secondary "></div>
-             <div class="day-3 card text-white m-4 p-3 bg-secondary "></div>
-             <div class="day-4 card text-white m-4 p-3 bg-secondary"></div>
-             <div class="day-5 card text-white m-4 p-3 bg-secondary"></div>
+             <div class="day-1 card text-white bg-secondary"></div>
+             <div class="day-2 card text-white  bg-secondary "></div>
+             <div class="day-3 card text-white  bg-secondary "></div>
+             <div class="day-4 card text-white bg-secondary"></div>
+             <div class="day-5 card text-white bg-secondary"></div>
            </div>
         </div>
       </div>
