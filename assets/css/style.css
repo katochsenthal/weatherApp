@@ -38,9 +38,19 @@ nav {
 .day-1,
 .day-2,
 .day-3,
-.day-4 {
+.day-4,
+.day-5 {
   padding: 5px;
   margin: 5px;
+  text-align: center;
+  font-weight: bold;
+
+  background: rgb(238, 174, 202);
+  background: radial-gradient(
+    circle,
+    rgba(238, 174, 202, 1) 0%,
+    rgba(148, 187, 233, 1) 100%
+  );
 }
 
 .btn-primary {

@@ -41,6 +41,12 @@ function generateSearchHistory() {
     });
   }
 }
+var city = function () {
+  var cityName = searchCityEl.value;
+  currentWeatherEl.innerHTML = "";
+  getCurrentWeather(cityName);
+  saveRecentCities(cityName);
+};
 
 // clear local storage
 
@@ -48,12 +54,7 @@ clearHistoryEl.addEventListener("click", function () {
   localStorage.clear();
 });
 
-var city = function () {
-  var cityName = searchCityEl.value;
-  currentWeatherEl.innerHTML = "";
-  getCurrentWeather(cityName);
-  saveRecentCities(cityName);
-};
+// getting and displaying current weather
 
 var getCurrentWeather = function (city) {
   fetch(
@@ -88,7 +89,7 @@ var getCurrentWeather = function (city) {
       currentWeatherEl.append(currentWeatherWind);
 
       var currentWeatherHumidity = document.createElement("p");
-      currentWeatherHumidity.innerHTML = "Humidity : " + humidityNow + " %";
+      currentWeatherHumidity.innerHTML = "Humidity :" + humidityNow + " %";
       currentWeatherEl.append(currentWeatherHumidity);
 
       getUv(cityLon, cityLat);
@@ -96,6 +97,8 @@ var getCurrentWeather = function (city) {
       fiveDayWeather(cityLon, cityLat);
     });
 };
+
+// uv index function
 
 var getUv = function (lon, lat) {
   fetch(
@@ -125,6 +128,8 @@ var getUv = function (lon, lat) {
     });
 };
 
+// five day weather forecast
+
 var fiveDayWeather = function (lon, lat) {
   fetch(
     "https://api.openweathermap.org/data/2.5/forecast?lon=" +
@@ -148,6 +153,7 @@ var fiveDayWeather = function (lon, lat) {
       for (var i = 0; i < fiveDays.length; i++) {
         var day = fiveDays[i];
         var icon = day.weather[0].icon;
+        console.log(icon);
         var iconUrl = $(".icon").html(
           "<img src='http://openweathermap.org/img/wn/" +
             icon +
@@ -162,13 +168,18 @@ var fiveDayWeather = function (lon, lat) {
         cardArray[i].append(dt + "  ");
         cardArray[i].append(iconUrl + " ");
         cardArray[i].append("Temp:" + dayTemp + "℃ ");
-        cardArray[i].append("Humidity: " + dayHumidity + "% ");
-        cardArray[i].append("WindSpeed:" + dayWind + "m/s");
+        cardArray[i].append("Humidity:" + dayHumidity + "% ");
+        cardArray[i].append("WindSpeed:" + "     " + dayWind + " m/s");
       }
     });
 };
 
+// events
+
 searchBtnEl.addEventListener("click", function () {
+  // if (searchCityEl === null) {
+  //   window.alert("You must enter a city");
+  // }
   city();
 });
 generateSearchHistory();
