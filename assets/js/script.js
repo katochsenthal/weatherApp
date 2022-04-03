@@ -11,16 +11,21 @@ var day5El = document.querySelector(".day-5");
 var cardArray = [day1El, day2El, day3El, day4El, day5El];
 var apiKey = "607439a3ad59adef49501bad43c27015";
 var historyEl = document.querySelector(".history");
+var clearHistoryEl = document.querySelector(".clear-history");
 
 // saving recent search to local storage
 
 var savedCities = JSON.parse(localStorage.getItem("recentCities")) || [];
+
+// saved cities
 
 function saveRecentCities(city) {
   savedCities.push(city);
   localStorage.setItem("recentCities", JSON.stringify(savedCities));
   generateSearchHistory();
 }
+
+// showing recent searches
 
 function generateSearchHistory() {
   historyEl.innerHTML = "";
@@ -36,6 +41,12 @@ function generateSearchHistory() {
     });
   }
 }
+
+// clear local storage
+
+clearHistoryEl.addEventListener("click", function () {
+  localStorage.clear();
+});
 
 var city = function () {
   var cityName = searchCityEl.value;
@@ -56,8 +67,7 @@ var getCurrentWeather = function (city) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
-      var currentDate = moment().format("MMMM Do YYYY");
+      var currentDate = moment().format("(MM/DD/YYYY)");
       var weatherNow = data.main.temp;
       var windSpeedNow = data.wind.speed;
       var humidityNow = data.main.humidity;
@@ -129,7 +139,6 @@ var fiveDayWeather = function (lon, lat) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       var weatherArray = data.list;
 
       var fiveDays = weatherArray.filter((day) =>
@@ -139,13 +148,19 @@ var fiveDayWeather = function (lon, lat) {
       for (var i = 0; i < fiveDays.length; i++) {
         var day = fiveDays[i];
         var icon = day.weather[0].icon;
-        var dt = new Date(day.dt * 1000);
+        var iconUrl = $(".icon").html(
+          "<img src='http://openweathermap.org/img/wn/" +
+            icon +
+            "@2x.png' alt='Icon depicting current weather.'>"
+        );
+        console.log(iconUrl);
+        var dt = moment(new Date(day.dt * 1000)).format("MM/DD/YYYY");
         var dayTemp = day.main.temp.toFixed(2);
         var dayHumidity = day.main.humidity;
         var dayWind = day.wind.speed;
 
-        cardArray[i].append(dt + " ");
-        cardArray[i].append(icon + " ");
+        cardArray[i].append(dt + "  ");
+        cardArray[i].append(iconUrl + " ");
         cardArray[i].append("Temp:" + dayTemp + "℃ ");
         cardArray[i].append("Humidity: " + dayHumidity + "% ");
         cardArray[i].append("WindSpeed:" + dayWind + "m/s");
