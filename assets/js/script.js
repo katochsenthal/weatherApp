@@ -153,20 +153,21 @@ var fiveDayWeather = function (lon, lat) {
       for (var i = 0; i < fiveDays.length; i++) {
         var day = fiveDays[i];
         var icon = day.weather[0].icon;
-        console.log(icon);
-        var iconUrl = $(".icon").html(
-          "<img src='http://openweathermap.org/img/wn/" +
-            icon +
-            "@2x.png' alt='Icon depicting current weather.'>"
-        );
-        console.log(iconUrl);
+
+        var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+        var img = $('<img/>').attr({ "src": iconUrl}).append(day[i])
+
+      }
+
+    
+
         var dt = moment(new Date(day.dt * 1000)).format("MM/DD/YYYY");
         var dayTemp = day.main.temp.toFixed(2);
         var dayHumidity = day.main.humidity;
         var dayWind = day.wind.speed;
 
         cardArray[i].append(dt + "  ");
-        cardArray[i].append(iconUrl + " ");
+        cardArray[i].append(img + " ");
         cardArray[i].append("Temp:" + dayTemp + "℃ ");
         cardArray[i].append("Humidity:" + dayHumidity + "% ");
         cardArray[i].append("WindSpeed:" + "     " + dayWind + " m/s");
