@@ -9,6 +9,12 @@ Weather app lets users search the weather for the city of their choice and displ
 
 App also saves most recent searches and creates shortcut for the recent searches to view city weather upon a click of a button.
 
+# Deployment Link
+
+https://katochsenthal.github.io/weatherApp/
+
+#
+
 # Preview
 
 ![alt text](assets/images/1.png)

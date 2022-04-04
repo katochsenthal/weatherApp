@@ -155,11 +155,7 @@ var fiveDayWeather = function (lon, lat) {
         var icon = day.weather[0].icon;
 
         var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-        var img = $('<img/>').attr({ "src": iconUrl}).append(day[i])
-
-      }
-
-    
+        var img = $("<img/>").attr({ src: iconUrl }).append(day[i]);
 
         var dt = moment(new Date(day.dt * 1000)).format("MM/DD/YYYY");
         var dayTemp = day.main.temp.toFixed(2);
