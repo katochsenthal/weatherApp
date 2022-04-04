@@ -52,6 +52,7 @@ var city = function () {
 
 clearHistoryEl.addEventListener("click", function () {
   localStorage.clear();
+  window.location.reload();
 });
 
 // getting and displaying current weather
@@ -174,9 +175,9 @@ var fiveDayWeather = function (lon, lat) {
 // events
 
 searchBtnEl.addEventListener("click", function () {
-  // if (searchCityEl === null) {
-  //   window.alert("You must enter a city");
-  // }
+  if (searchCityEl === null) {
+    window.alert("You must enter a city");
+  }
   city();
 });
 generateSearchHistory();
