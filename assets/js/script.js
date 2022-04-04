@@ -163,7 +163,7 @@ var fiveDayWeather = function (lon, lat) {
         var dayWind = day.wind.speed;
 
         cardArray[i].append(dt + "  ");
-        cardArray[i].append(img + " ");
+        cardArray[i].appendChild(document.createElement("img")).src = iconUrl;
         cardArray[i].append("Temp:" + dayTemp + "℃ ");
         cardArray[i].append("Humidity:" + dayHumidity + "% ");
         cardArray[i].append("WindSpeed:" + "     " + dayWind + " m/s");
