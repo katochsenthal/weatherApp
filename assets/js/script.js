@@ -43,6 +43,7 @@ function generateSearchHistory() {
 }
 var city = function () {
   var cityName = searchCityEl.value;
+
   currentWeatherEl.innerHTML = "";
   getCurrentWeather(cityName);
   saveRecentCities(cityName);
