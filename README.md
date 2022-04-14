@@ -19,7 +19,6 @@ https://katochsenthal.github.io/weatherApp/
 
 ![alt text](assets/images/1.png)
 ![alt text](assets/images/2.png)
-![alt text](assets/images/3.png)
 
 # Technologies Used.
 

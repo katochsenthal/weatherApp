@@ -71,16 +71,32 @@ var getCurrentWeather = function (city) {
     })
     .then(function (data) {
       var currentDate = moment().format("(MM/DD/YYYY)");
+      // fetching icon
+      var currentWeatherIcon = data.weather[0].icon;
+      // fetching icon img
+      var iconUrl =
+        "http://openweathermap.org/img/wn/" + currentWeatherIcon + "@2x.png";
+
       var weatherNow = data.main.temp;
       var windSpeedNow = data.wind.speed;
       var humidityNow = data.main.humidity;
       var cityLon = data.coord.lon;
       var cityLat = data.coord.lat;
 
+      currentWeatherEl.innerHTML = "";
+
       var cityHeading = document.createElement("h2");
       cityHeading.className = "city_heading";
       cityHeading.innerHTML = city + ", " + currentDate;
       currentWeatherEl.append(cityHeading);
+
+      // displaying weather img on current weather
+      var weatherImgEl = document.createElement("IMG");
+      console.log(weatherImgEl);
+      weatherImgEl.setAttribute("src", iconUrl);
+      weatherImgEl.setAttribute("width", "90");
+      weatherImgEl.setAttribute("height", "90");
+      currentWeatherEl.append(weatherImgEl);
 
       var currentWeatherTemp = document.createElement("p");
       currentWeatherTemp.innerHTML = "Temp: " + weatherNow + " ℃";
@@ -163,6 +179,8 @@ var fiveDayWeather = function (lon, lat) {
         var dayTemp = day.main.temp.toFixed(2);
         var dayHumidity = day.main.humidity;
         var dayWind = day.wind.speed;
+
+        cardArray[i].innerHTML = "";
 
         cardArray[i].append(dt + "  ");
         cardArray[i].appendChild(document.createElement("img")).src = iconUrl;
